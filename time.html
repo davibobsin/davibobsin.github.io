@@ -1,0 +1,67 @@
+<html>
+  <head>
+    <title>Time left</title>
+    <style >
+	.content {
+	  background-color: #DDD;
+	  width: 222px;
+	  height: 200px;
+	  position: absolute;
+	  left: 50%;
+	  top: 50%;
+	  transform: translate(-50%, -50%);
+	}
+	td {
+	  width: 20px;
+	  height: 20px;
+	  font-size: 9px;
+	  font-family:arial,sans-serif;
+	  color: #AAA;
+	  background-color: #EEE;
+	}
+	
+	td.used{
+	  background-color: #0E0;
+	}
+    </style>
+    <script>
+      function createTable()
+      {
+	var now = new Date();
+	var begin = new Date(now.getFullYear(), 3, 0);
+	var end = new Date(now.getFullYear(), 5, 29);
+	var total = Math.floor((end-begin)/(1000*60*60*24));	
+	var days = Math.floor((now-begin)/(1000*60*60*24));	
+
+	var width=10;
+	var table = document.getElementById("date");
+
+	for (var i=0;i<total;i++)
+	{	
+	  var y = Math.floor(i/width);
+	  var x = Math.floor(i%width);
+
+	  if(x == 0)
+	  	table.innerHTML = table.innerHTML + "<tr id=\"lin"+y+"\"></tr>"
+	    
+          var line = document.getElementById("lin"+y);
+	  if (i<days)
+	    line.innerHTML = line.innerHTML+"<td class=\"used\" id=\"col"+x+"\"></td>";
+	  else
+	    line.innerHTML = line.innerHTML+"<td id=\"col"+x+"\"></td>";
+	}
+      }
+    </script>
+
+  </head>
+
+    
+  <body onload="createTable()">
+    <div class="content">
+      <table id="date">
+      </table>
+    </div>
+
+
+  </body>
+</html>
