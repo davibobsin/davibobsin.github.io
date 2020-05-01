@@ -1,0 +1,49 @@
+<html>
+<head>
+
+<title>PI Approximation</title>
+
+</head>
+
+<body>
+<script>
+function calculate()
+{
+	var step = document.getElementById("step").value;
+	var area_squ = 0,area_cir = 0;
+	var r = step;
+
+	var d = new Date();
+	var time_elapsed,time_begin = d.getTime();
+	
+	document.getElementById("progress").innerHTML = "Started...";
+
+	for(var y=0; y<step ; y++)
+	{
+		for(var x=0; x<step ; x++)
+		{
+			area_squ++;
+			if ( (x*x + y*y) <= r*r )
+				area_cir++;
+		}
+	}
+
+	d = new Date();
+	time_elapsed = d.getTime()-time_begin;
+	document.getElementById("progress").innerHTML = "Done!";
+	document.getElementById("result").innerHTML = "Pi approx.: "+4*(area_cir/area_squ);
+	document.getElementById("time").innerHTML = "Time elapsed: "+time_elapsed+" ms";
+}
+</script>
+<h1>PI's Approximation</h1>
+
+<label>Width of the grid:</label>
+<input type=number id="step"></input>
+<button onclick=calculate()>CALCULE</button>
+<div id="progress">Not started</div>
+<br>
+<div id="result"> </div>
+<div id="time"> </div>
+
+</body>
+</html>
